@@ -52,4 +52,4 @@ def periodicalProblem(T: float, n: int):
     p = calculate_p(h1, h2, h3, q1, q2, q3)
 
     # graphics(x3, h3)
-    # p_and_h_graphic(x1, p, h1)
+    p_and_h_graphic(x1, p, x3, h3, T, n * 4)
