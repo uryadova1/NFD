@@ -10,7 +10,8 @@ def calculate_p(h1, h2, h3, q1, q2, q3):
 
     norm1 = ((h1 - h2) ** 2 + (q1 - q2) ** 2) ** (1 / 2)
     norm2 = ((h2 - h3) ** 2 + (q2 - q3) ** 2) ** (1 / 2)
-    p = np.log2(abs(norm1 / norm2))
+    gg = abs(norm1 / norm2)
+    p = np.log2(gg)
     # p = np.log(norm1/norm2)/np.log(2)
     return p
 

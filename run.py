@@ -1,7 +1,8 @@
 import numpy as np
 from NFD import NFD
-from const import g, coeffs
-from graphics import graphics
+from const import g
+from countData import calculate_p
+from graphics import graphics, p_and_h_graphic
 
 
 def periodicalU(a: float, x0: np.ndarray, X: float):
@@ -20,16 +21,7 @@ def deltaT(u: np.ndarray, h: np.ndarray, delta_x: float):
     return z * delta_x / a
 
 
-def periodicalProblemConditions(T: float, n: int):
-    X = 10
-    a = 2
-    b = 10
-    x_start = 0
-    x_end = x_start + X
-
-    a_coeffs = coeffs(6)
-
-    # n = int(input())
+def start_NFD(x_start, x_end, X, n, T, a, b):
     x0 = np.linspace(x_start, x_end, n)
     u0 = periodicalU(a, x0, X)
     h0 = periodicalH(b, u0)
@@ -42,6 +34,22 @@ def periodicalProblemConditions(T: float, n: int):
     time_steps = int(T / delta_t)
 
     for i in range(time_steps):
-        h_n, q_n = NFD(q_n, h_n, a_coeffs, delta_t)
+        h_n, q_n = NFD(q_n, h_n, delta_t)
+    return x0, h_n, q_n
 
-    graphics(x0, h_n)
+
+def periodicalProblem(T: float, n: int):
+    X = 10
+    a = 2
+    b = 10
+    x_start = 0
+    x_end = x_start + X
+
+    x1, h1, q1 = start_NFD(x_start, x_end, X, n, T, a, b)
+    x2, h2, q2 = start_NFD(x_start, x_end, X, 2 * n, T, a, b)
+    x3, h3, q3 = start_NFD(x_start, x_end, X, 4 * n, T, a, b)
+
+    p = calculate_p(h1, h2, h3, q1, q2, q3)
+
+    # graphics(x3, h3)
+    # p_and_h_graphic(x1, p, h1)
