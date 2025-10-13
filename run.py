@@ -46,10 +46,10 @@ def periodicalProblem(T: float, n: int):
     x_end = x_start + X
 
     x1, h1, q1 = start_NFD(x_start, x_end, X, n, T, a, b)
-    x2, h2, q2 = start_NFD(x_start, x_end, X, 2 * n, T, a, b)
-    x3, h3, q3 = start_NFD(x_start, x_end, X, 4 * n, T, a, b)
+    # x2, h2, q2 = start_NFD(x_start, x_end, X, 2 * n, T, a, b)
+    # x3, h3, q3 = start_NFD(x_start, x_end, X, 4 * n, T, a, b)
+    #
+    # p = calculate_p(h1, h2, h3, q1, q2, q3)
 
-    p = calculate_p(h1, h2, h3, q1, q2, q3)
-
-    # graphics(x3, h3)
-    p_and_h_graphic(x1, p, x3, h3, T, n * 4)
+    graphics(x1, h1)
+    # p_and_h_graphic(x1, p, x3, h3, T, n * 4)

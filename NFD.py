@@ -3,9 +3,20 @@ from const import g, a_coeffs
 
 
 def L(l):  # np.array
-    l = np.concatenate((l[-3:], l, l[:3]))
-    a1, a2, a3 = a_coeffs
-    return -a3 * l[:-6] - a2 * l[1:-5] - a1 * l[2:-4] + a1 * l[4:-2] + a2 * l[5:-1] + a3 * l[6:]
+    new_l = np.zeros_like(l)
+    a_len = len(a_coeffs)
+    l = np.concatenate((l[-a_len:], l, l[:a_len]))
+    a_len *= 2
+
+    for i, a in enumerate(a_coeffs[::-1]):
+        if i == 0:
+            new_l = (-a * l[: -a_len + i] + a * l[a_len - i:])
+        else:
+            new_l = new_l + (-a * l[i: -a_len + i] + a * l[a_len - i: -i])
+
+    # a1, a2, a3 = a_coeffs
+    # tmp = -a3 * l[:-6] - a2 * l[1:-5] - a1 * l[2:-4] + a1 * l[4:-2] + a2 * l[5:-1] + a3 * l[6:]
+    return new_l
 
 
 def F(q: np.ndarray, h: np.ndarray):
