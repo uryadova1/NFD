@@ -13,14 +13,15 @@ def calculate_p(h1, h2, h3, q1, q2, q3):
     norm2 = ((h2 - h3) ** 2 + (q2 - q3) ** 2) ** (1 / 2)
 
     try:
-        gg = abs(norm1 / norm2)  # - пришлось эту муть развести, потому что питон упорно не соглашался, что к типу np.ndarray применим логарифм.....
-        gg = np.array(gg)
-        p = np.log(gg) / np.log(2)
+        # gg = abs(norm1 / norm2)
+        # - пришлось эту муть развести, потому что питон упорно не соглашался, что к типу np.ndarray применим логарифм.....
+        # gg = np.array(gg)
+        p = np.log(np.array(abs(norm1 / norm2))) / np.log(2)
         return p
     except TypeError:
-        print(type(gg), gg.shape)
+        print("omg type error (opat'........)")
 
 
 def runge_error(u_h, u_h2, p):
-    error = np.linalg.norm(u_h2[::2] - u_h, ord=2) / (2 ** p - 1)
+    error = abs(np.linalg.norm(u_h2[::2] - u_h, ord=2) / (2 ** p - 1))
     return error

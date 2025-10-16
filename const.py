@@ -26,5 +26,5 @@ def coeffsCount(order: int):
     return coeffs(order)
 
 g = 10
-order = 8
-a_coeffs = coeffs(order)
+# order = 8
+# a_coeffs = coeffs(order)
