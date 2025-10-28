@@ -21,7 +21,7 @@ def deltaT(u: np.ndarray, h: np.ndarray, delta_x: float):
     return z * delta_x / a
 
 
-def start_NFD(x_start: int , x_end: int, X: int, a_coeffs: list, n: int, T: float, a: int, b: int):
+def start_NFD(x_start, x_end, X, a_coeffs, art_vis_coeffs, n, T, a, b, order):
     x0 = np.linspace(x_start, x_end, n)
     u0 = periodicalU(a, x0, X)
     h0 = periodicalH(b, u0)
@@ -33,9 +33,17 @@ def start_NFD(x_start: int , x_end: int, X: int, a_coeffs: list, n: int, T: floa
     delta_t = delta_x * 0.05
 
     time_steps = int(T / delta_t)
+    # print(T)
+    # print(f"time steps {time_steps}")
 
+    # print(f"h0: {h0}")
     for i in range(time_steps):
-        h_n, q_n = NFD(q_n, h_n, delta_t, a_coeffs)
+        print(i)
+        # if i == 0:
+        #     graphics(x0, h_n)
+        h_n, q_n = NFD(q_n, h_n, 0.05, a_coeffs, art_vis_coeffs, order)
+        # if i == 0:
+        #     graphics(x0, h_n)
     return x0, h_n, q_n
 
 

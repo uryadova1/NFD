@@ -1,7 +1,18 @@
 from fractions import Fraction
 import sympy as sp
 
-def coeffs(order: int):
+
+def art_vis_coeffs_count(n):
+    coefficients = [1]
+    current = 1
+    for k in range(1, n // 2 + 1):
+        current = current * (n - k + 1) // k
+        coefficients.append(current)
+
+    return coefficients
+
+
+def coeffs_count(order: int):
     s = order // 2
 
     symbols = sp.symbols(f'a1:{s + 1}')
@@ -17,14 +28,9 @@ def coeffs(order: int):
 
     coeffs = []
     for i in range(1, s + 1):
-        coeffs.append(Fraction(solution[sp.symbols(f'a{i}')]))
+        coeffs.append(-1 * Fraction(solution[sp.symbols(f'a{i}')]))
 
     return coeffs
 
 
-def coeffsCount(order: int):
-    return coeffs(order)
-
 g = 10
-# order = 8
-# a_coeffs = coeffs(order)
